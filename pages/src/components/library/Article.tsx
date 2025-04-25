@@ -55,6 +55,7 @@ const Article = (props: ArticleProps) => {
   const [type, setType] = useState<string>("md");
   const [pdfUrl, setPdfUrl] = useState<string>("");
   const [videoId, setVideoId] = useState<string>("");
+  const [marimoUrl, setMarimoUrl] = useState<string>("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -86,6 +87,9 @@ const Article = (props: ArticleProps) => {
           }
           if (json["type"] === "video") {
             setVideoId(json["id"]);
+          }
+          if (json["type"] === "marimo") {
+            setMarimoUrl(json["url"]);
           }
           window.scrollTo(0, 0);
           setType(json["type"]);
@@ -248,6 +252,17 @@ const Article = (props: ArticleProps) => {
         width={"100%"}
         style={{
           display: type === "video" ? "block" : "none",
+          marginTop: "55px",
+          border: "none",
+          height: "calc(100vh - 55px)",
+        }}
+      />
+      <iframe
+        src={marimoUrl}
+        title={marimoUrl}
+        width={"100%"}
+        style={{
+          display: type === "marimo" ? "block" : "none",
           marginTop: "55px",
           border: "none",
           height: "calc(100vh - 55px)",

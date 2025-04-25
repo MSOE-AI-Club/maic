@@ -254,6 +254,13 @@ async def get_content_type(content_id: str):
                     "id": markdown[8].replace("id:", "").strip(),
                 }
             }
+        if content_type == "marimo":
+            return {
+                "response": {
+                    "type": content_type,
+                    "url": markdown[8].replace("url:", "").strip(),
+                }
+            }
         return {"response": {"type": content_type}}
 
     return None
