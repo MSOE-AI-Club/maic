@@ -141,6 +141,13 @@ const ModalItem = (props: ModalItemProps) => {
       navigate(
         `/library?nav=${navLoc}#${title.toLowerCase().replaceAll(" ", "-")}`
       );
+    } else if (type.toLowerCase() === "marimo") {
+      navigate(`/library?nav=Workshops&article=${props.articleId}`);
+    } else if (type.includes("anchor")) {
+      const navLoc = type.split(" - ")[1];
+      navigate(
+        `/library?nav=${navLoc}#${encodeURIComponent(title)}`
+      );
     } else {
       if (props.openPreview && props.articleId) {
         if (props.openPreview(props.articleId)) {

@@ -3,6 +3,7 @@ import { Button, Divider } from "@mui/material";
 import "./assets/library/css/left-panel.css";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import ScienceIcon from "@mui/icons-material/Science";
+import ConstructionIcon from "@mui/icons-material/Construction";
 import DescriptionIcon from "@mui/icons-material/Description";
 import Movie from "@mui/icons-material/Movie";
 import Favorite from "@mui/icons-material/Favorite";
@@ -111,6 +112,14 @@ const LeftPanel = (props: LeftPanelProps) => {
           onClick={() => props.forceRefresh("Articles")}
         >
           Articles
+        </Button>
+        <Button
+          component={Link}
+          to="/library?nav=Workshops"
+          startIcon={<ConstructionIcon />}
+          onClick={() => props.forceRefresh("Workshops")}
+        >
+          Workshops
         </Button>
         {articlesDropdown && <div>{categories}</div>}
         <Button component={Link} to="/library?nav=Videos" startIcon={<Movie />}>
