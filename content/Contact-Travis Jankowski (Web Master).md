@@ -5,6 +5,6 @@ not_in_recent:
 
 ### Lead Website Developer & Maintainer
 
-I am a Junior Software Engineering student pursuing a Data Science minor. I joined AI Club to learn more about applying AI and AI concepts to keep up to date and apply it to my learning process. I am actively involved on campus in a variety of other organizations such as Triangle Fraternity, User Experience Club, Raider Robotics, and Mythos Eros and Echoes. I enjoy game development, music composition and improvisation, and website management.
+Hi, my name is Travis and I am a junior studying computer science. My favorite parts of AI club are the opportunities to apply data science skills to real world problems through hands-on projects. I also serve as the president of Midnight Robotics and I have been a software engineering intern at Cognex for two years.
 
 <a style = 'font-weight: bold; color: white;'>Contact Me Here:</a> <a style = 'color: blue eyes;'>jankowskit@msoe.edu</a>
