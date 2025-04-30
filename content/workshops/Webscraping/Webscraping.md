@@ -6,4 +6,4 @@ image: ./img/article_content/webscraping.png
 difficulty: advanced
 authors: Adam Haile
 categories: workshop, python, webscraping
-url: https://devartech.github.io/webscraping/
+url: https://msoe-ai-club.github.io/workshops-marimo/webscraping.html
