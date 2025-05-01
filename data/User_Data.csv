@@ -81,7 +81,7 @@ Patrick Rafferty,test description,Hacksgiving|NVIDIA DLI,56,56,Patrick,Rafferty
 Ryan Peter,test description,,3,3,Ryan,Peter
 Theophanes Zinos,test description,,3,3,Theophanes,Zinos
 Aarini Chakraborty,test description,,2,2,Aarini,Chakraborty
-Adrian Rubio Reyes,test description,NVIDIA DLI,9,9,Adrian,Rubio
+Adrian Rubio Reyes,test description,NVIDIA DLI,11,11,Adrian,Rubio
 Alexander Mayfield,test description,,2,2,Alexander,Mayfield
 Andrew Briggs,test description,,2,2,Andrew,Briggs
 Andrew Kwaw,test description,,2,2,Andrew,Kwaw
@@ -101,7 +101,7 @@ Patrick Saxton,test description,,2,2,Patrick,Saxton
 Roberto Garcia,test description,,2,2,Roberto,Garcia
 Samir Mahmud,test description,NVIDIA DLI,5,5,Samir,Mahmud
 Tiffany Villalobos,test description,,3,3,Tiffany,Villalobos
-Tyge Plater,test description,eboard2025|eboard2024|Hacksgiving|NVIDIA DLI|2024 Researcher|2024 MICS Attendee|ROSIE Competition Finalist 2024,19,19,Tyge,Plater
+Tyge Plater,test description,eboard2025|eboard2024|Hacksgiving|NVIDIA DLI|2024 Researcher|2024 MICS Attendee|ROSIE Competition Finalist 2024,21,21,Tyge,Plater
 Tyler Faulkner,test description,,2,2,Tyler,Faulkner
 William Peterson,test description,,2,2,William,Peterson
 Zachary Kohlman,test description,,2,2,Zachary,Kohlman
@@ -219,7 +219,7 @@ Eliana Biggers,test description,NVIDIA DLI,5,5,Eliana,Biggers
 Krueger (Mac) Williams,test description,NVIDIA DLI,5,5,Krueger,(Mac)
 Cristian Tejeda,test description,NVIDIA DLI,3,3,Cristian,Tejeda
 Jawadul Chowdhury,test description,NVIDIA DLI|2024 Researcher,1,1,Jawadul,Chowdhury
-Trent Adamson,test description,NVIDIA DLI,8,8,Trent,Adamson
+Trent Adamson,test description,NVIDIA DLI,10,10,Trent,Adamson
 Dimas Monte,test description,NVIDIA DLI,9,1,Dimas,Monte
 Nastasja Radulovic,test description,NVIDIA DLI,2,2,Nastasja,Radulovic
 Vit Kalianko,test description,NVIDIA DLI,2,2,Vit,Kalianko
@@ -250,7 +250,7 @@ Josiah Mathews,test description,,12,12,,
 Garrett Voight,test description,,2,2,,
 Josh Myers,test description,2025 Researcher,3,3,,
 Ashton Thao,test description,,2,2,,
-Ryan Pal Hilgendorf,test description,2025 Researcher|2025 Researcher,5,2,,
+Ryan Pal Hilgendorf,test description,2025 Researcher|2025 Researcher,5,4,,
 Hayden Park,test description,,12,12,,
 Jonathan Fantoni,test description,,1,1,,
 Jasdeep Singh,test description,,2,0,,
@@ -283,7 +283,7 @@ Trevor Hancock,test description,NVIDIA DLI,11,3,,
 Bryan Becerra-Cano,test description,,1,1,,
 Neeraj Renil Kadavatheri,test description,,2,2,,
 Giovanni Guaman,test description,,2,2,,
-Will Lassiter,test description,2025 MICS Attendee|ROSIE Competition Finalist 2025|ROSIE Presenter|ROSIE Presenter|NVIDIA DLI|2025 Researcher|2025 Researcher,13,11,,
+Will Lassiter,test description,2025 MICS Attendee|ROSIE Competition Finalist 2025|ROSIE Presenter|ROSIE Presenter|NVIDIA DLI|2025 Researcher|2025 Researcher,13,13,,
 Tyler Moake,test description,,1,1,,
 Joseph Beattie,test description,2025 MICS Attendee|ROSIE Competition Finalist 2025|ROSIE Presenter|2025 Researcher|2025 Researcher,19,16,,
 Preston Bohnsack,test description,,2,2,,
@@ -316,7 +316,7 @@ Chloe Hyatt,test description,,1,1,,
 Zach Gardipee,test description,,1,1,,
 Zach Burke,test description,,1,1,,
 Josiah Reinholz,test description,,8,0,,
-Zoe Kirkman,test description,2025 MICS Attendee|NVIDIA DLI|2025 Researcher|2025 Researcher,19,19,,
+Zoe Kirkman,test description,2025 MICS Attendee|NVIDIA DLI|2025 Researcher|2025 Researcher,21,21,,
 Madison Engebose,test description,eboard2025|NVIDIA DLI,9,6,,
 Chukwuma Chukwuma-Ugwu,test description,,1,1,,
 Peter Kwaterski,test description,2025 MICS Attendee|2025 Researcher|2025 Researcher,9,5,,
@@ -370,3 +370,4 @@ Marie Diffley,test description,,1,0,,
 Ben Williams,test description,NVIDIA DLI,2,2,,
 Joseph Loduca,test description,NVIDIA DLI,2,2,,
 Joshua Myers,test description,,2,2,,
+Sofia DeFriese,test description,,2,2,,
