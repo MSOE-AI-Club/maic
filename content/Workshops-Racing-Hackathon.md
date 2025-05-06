@@ -1,4 +1,4 @@
-img: ./img/thumbnails/Racing_Hackathon_Poster.png
+img: https://maic-fastapi-lambda.s3.amazonaws.com/img/thumbnails/Racing_Hackathon_Poster.png
 summary: Racing Hackathon
 date: 21/1/2023
 title: Racing Hackathon

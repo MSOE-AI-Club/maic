@@ -9,7 +9,7 @@ from time import time # profiling
 
 t1 = time()
 
-TOP_PAGES = ['index', 'Learning_Resources', 'Research', 'Workshops', 'Merch', 'Contact', 'About', 'Leaderboard']
+TOP_PAGES = ['index', 'library', 'learning-tree', 'Workshops', 'Merch', 'Contact', 'About', 'Leaderboard']
 
 def get_page_display_name(name):
     if name=='index': return 'Home'
@@ -26,7 +26,7 @@ def common_metadata(page_name):
     return elems(
         title('MSOE AI Club') if page_name == 'index'
         else title(f'MAIC - {get_page_display_name(page_name)}'),
-        link(rel='icon', type='image/png', href='./img/misc/Sticker.png'),
+        link(rel='icon', type='image/png', href='https://maic-fastapi-lambda.s3.amazonaws.com/img/misc/Sticker.png'),
         meta(charset="UTF-8"),
         meta(name='viewport', content='width=device-width, initial-scale=1.0'),
         link(rel='stylesheet', href='./js-css/style.css'),
@@ -36,11 +36,11 @@ def common_metadata(page_name):
 def common_toolbar(page_name):
     return div(
         # h3('<a href = "index.html" style = "text-decoration: none; background-image: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(80,77,255,1) 8%, rgba(6,170,216,1) 26%, rgba(100,253,253,1) 42%, rgba(255,141,255,1) 61%, rgba(144,100,253,1) 80%, rgba(80,77,255,1) 100%); -webkit-background-clip: text; background-clip: text; color: transparent;">MAIC</a>'),
-        h3(a(img(src = 'img/misc/Sticker.png', height='25', style='float: left; padding-right: 10px; padding-top: 5px; padding-bottom: 5px;'))),
+        h3(a(img(src = 'https://maic-fastapi-lambda.s3.amazonaws.com/img/misc/Sticker.png', height='25', style='float: left; padding-right: 10px; padding-top: 5px; padding-bottom: 5px;'))),
         elems(
             a(
-                p(get_page_display_name(page)),
-                href = ('#below-splash' if page_name=='index' and page=='index' else f'{page}.html'),
+                p(get_page_display_name(page if (page != "library" and page !="learning-tree") else page.replace("-", " ").title())),
+                href = ('#below-splash' if page_name=='index' and page=='index' else f'{page}.html' if (page!="library" and page!="learning-tree") else page),
                 style = 'background-color: rgb(55, 34, 107); font-weight: bold; padding-top: 5px; padding-bottom: 5px; border-radius: 10px;' if page == page_name else ''
             ) for page in TOP_PAGES[:-1]
         ),
@@ -59,7 +59,7 @@ def common_content_to_card(entry, extra=''):
             style='margin-right: 10px;'
         ),
         id=entry['fname'],
-        style="background-image: url(./img/misc/NN_background_pattern_2.png); background-size: cover; border-radius: 30px; border-style: solid; border-width: 3px; border-color: gray; padding-bottom: 35px; padding-right: 5%; padding-left: 5%; overflow: auto; margin-bottom: 20px;"
+        style="background-image: url(https://maic-fastapi-lambda.s3.amazonaws.com/img/misc/NN_background_pattern_2.png); background-size: cover; border-radius: 30px; border-style: solid; border-width: 3px; border-color: gray; padding-bottom: 35px; padding-right: 5%; padding-left: 5%; overflow: auto; margin-bottom: 20px;"
     )
 
 def common_content_group_to_page(page_name, content):
@@ -128,7 +128,7 @@ def build_leaderboard_html(user_data_path, icons_data_path):
         if type(user_data_df.iloc[i]['Awards']) != float:
             award_names = user_data_df.iloc[i]['Awards'].split("|")
 
-            if 'eboard2023' in award_names:
+            if 'eboard2025' in award_names:
                 print("EBOARD MEMBER:", leaderboard_df['User'].iloc[i])
                 leaderboard_df['All-Time'].iloc[i] = 'EBOARD'
                 leaderboard_df['Current'].iloc[i] = 'EBOARD'
@@ -175,6 +175,9 @@ t3 = time()
 
 CONTENT = []
 for fname in listdir('./content'):
+    if os.path.isdir(os.path.join(fname)):
+        continue
+        
     entry = {}
     entry['type'] = fname.split('/')[-1].split('-')[0]
     entry['fname'] = fname.split('/')[-1].split('.')[0]
@@ -236,54 +239,54 @@ for page_name in TOP_PAGES:
     except FileNotFoundError:
         print('Missing expected top page:', f'./py/page-{page_name}.py')
 
-for entry in CONTENT_GROUPS['Learning_Resources']:
-    if 'body' not in entry: continue
-    with open(common_get_article_link(entry["fname"]), 'w', encoding='utf-8') as f:
-        content = html(
-            head(
-                common_metadata(entry['title']),
-                link(rel='stylesheet', href='./js-css/article.css')
-            ),
-            body(
-                common_toolbar(entry['title']),
-                div(
-                    div(
-                        h1(entry['title']),
-                        div(
-                            div(b("By: ") + ', '.join(entry['authors'])),
-                            div(b("Published: ") + entry['date'].strftime("%b %d, %Y")),
-                            div(entry['summary']),
-                            style="padding-bottom: 25px; color: rgb(var(--text-2)); font-size: 0.9rem; line-height: 1.25rem;"
-                        ),
-                        entry['body'],
-                        style="max-width: 72rem; padding-left: 30px; padding-bottom: 35px;"
-                    ),
-                    style="width:100%; display: flex; justify-content: center;"
-                ),
-                script("""
-                    document.querySelectorAll('code').forEach(e => {
-                        if(e.parentElement.textContent.trim() == e.textContent.trim()){
-                            e.style.display='inline-block';
-                            e.style.padding='10px';
-                        }
-                    });
-                """),
-                script("document.querySelectorAll('code').forEach(x => x.classList.add('prettyprint'))"),
-                script(src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js")
-            )
-        )
-        lines = content.split('\n')
-        content = ''
-        dedent_amt = 0
-        for l in lines:
-            content += l[dedent_amt:]+'\n'
-            if dedent_amt == 0:
-                if l.strip().startswith('<pre><code'):
-                    dedent_amt = l.index('<pre><code')
-            else:
-                if l.strip().startswith('</code></pre>'):
-                    dedent_amt = 0
-        f.write(content)
+# for entry in CONTENT_GROUPS['Learning_Resources']:
+#     if 'body' not in entry: continue
+#     with open(common_get_article_link(entry["fname"]), 'w', encoding='utf-8') as f:
+#         content = html(
+#             head(
+#                 common_metadata(entry['title']),
+#                 link(rel='stylesheet', href='./js-css/article.css')
+#             ),
+#             body(
+#                 common_toolbar(entry['title']),
+#                 div(
+#                     div(
+#                         h1(entry['title']),
+#                         div(
+#                             div(b("By: ") + ', '.join(entry['authors'])),
+#                             div(b("Published: ") + entry['date'].strftime("%b %d, %Y")),
+#                             div(entry['summary']),
+#                             style="padding-bottom: 25px; color: rgb(var(--text-2)); font-size: 0.9rem; line-height: 1.25rem;"
+#                         ),
+#                         entry['body'],
+#                         style="max-width: 72rem; padding-left: 30px; padding-bottom: 35px;"
+#                     ),
+#                     style="width:100%; display: flex; justify-content: center;"
+#                 ),
+#                 script("""
+#                     document.querySelectorAll('code').forEach(e => {
+#                         if(e.parentElement.textContent.trim() == e.textContent.trim()){
+#                             e.style.display='inline-block';
+#                             e.style.padding='10px';
+#                         }
+#                     });
+#                 """),
+#                 script("document.querySelectorAll('code').forEach(x => x.classList.add('prettyprint'))"),
+#                 script(src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js")
+#             )
+#         )
+#         lines = content.split('\n')
+#         content = ''
+#         dedent_amt = 0
+#         for l in lines:
+#             content += l[dedent_amt:]+'\n'
+#             if dedent_amt == 0:
+#                 if l.strip().startswith('<pre><code'):
+#                     dedent_amt = l.index('<pre><code')
+#             else:
+#                 if l.strip().startswith('</code></pre>'):
+#                     dedent_amt = 0
+#         f.write(content)
 
 with open('./404.html', 'w') as f:
     f.write(
@@ -296,7 +299,7 @@ with open('./404.html', 'w') as f:
                 div(
                     h1('404', style="font-size: 800%;"),
                     h2("The page you're looking for doesn't exist!", a('Go back!', href="./index.html")),
-                    p(img(src='./img/misc/404snail.png')),
+                    p(img(src='https://maic-fastapi-lambda.s3.amazonaws.com/img/misc/404snail.png')),
                     id='stuff'
                 )
             )

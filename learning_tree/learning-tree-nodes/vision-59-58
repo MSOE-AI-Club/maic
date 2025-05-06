@@ -1,0 +1,9 @@
+name="Image Preprocessing"
+description=“Discover key techniques like resizing, normalization, and augmentation to prepare images for analysis by machine learning models.”
+category="Computer Vision"
+category_color="cyan"
+highlighted_path="True"
+horizontal_displacement=""
+vertical_displacement=""
+api_image_path="./img/tree-thumbnails/image-preprocessing.png"
+link="/library?nav=Articles&article=002_comp-vis"

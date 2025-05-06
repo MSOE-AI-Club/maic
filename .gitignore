@@ -10,4 +10,10 @@ Merch.html
 Research.html
 Workshops.html
 articles-*.html
+.idea/vcs.xml
 index.html
+Pipfile
+Pipfile.lock
+/node_modules
+/.idea
+Pipfile

@@ -1,0 +1,172 @@
+.content {
+  margin: 0;
+  padding: 0;
+  width: max(calc(100% - 300px), calc(100% - 12.5%));
+  min-height: 100vh;
+  background-color: rgb(25, 25, 30);
+  color: white;
+  text-align: left;
+  margin-left: max(200px, 12.5%);
+}
+
+.article {
+  padding: 2rem 4rem;
+}
+
+.article h1 {
+  font-size: 3rem;
+}
+
+.article h3 {
+  color: rgb(139, 140, 173);
+  margin: 0;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.article pre {
+  background-color: rgb(35, 39, 42);
+  padding: 0.5rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.article pre > code {
+  display: inline-block;
+  width: 100%;
+  overflow: auto;
+  padding-left: 1rem;
+  border-radius: 1rem;
+}
+
+.article p > code {
+  background-color: rgb(35, 39, 42);
+  padding: 0.5rem;
+  border-radius: 1rem;
+  margin: 0.1rem;
+  line-height: 3;
+}
+
+.article p > a {
+  color: rgb(224, 132, 255);
+}
+
+.article img {
+  margin: 1rem 0;
+  max-width: 100%;
+  border-radius: 1rem;
+}
+
+.copy-button {
+  display: flex;
+  align-items: center;
+  color: white;
+  background-color: rgb(25, 25, 30);
+  border: 0;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+.copy-button span {
+  width: 24px;
+  height: 24px;
+}
+
+.copy-button:hover {
+  background-color: #1976d2;
+}
+
+.article-title > h1 {
+  margin-bottom: 15px;
+}
+
+prettyprint {
+  font-family: Menlo, "Bitstream Vera Sans Mono", "DejaVu Sans Mono", Monaco,
+    Consolas, monospace !important;
+  border: 0 !important;
+}
+
+.pln {
+  color: #c5c8c6 !important;
+}
+
+ol.linenums {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  color: #969896 !important;
+}
+
+li.L0,
+li.L1,
+li.L2,
+li.L3,
+li.L4,
+li.L5,
+li.L6,
+li.L7,
+li.L8,
+li.L9 {
+  padding-left: 1em !important;
+  background-color: #1d1f21 !important;
+  list-style-type: decimal !important;
+}
+
+@media screen {
+  .str {
+    color: #b5bd68 !important;
+  }
+
+  .kwd {
+    color: #b294bb !important;
+  }
+
+  .com {
+    color: #969896 !important;
+  }
+
+  .typ {
+    color: #81a2be !important;
+  }
+
+  .lit {
+    color: #de935f !important;
+  }
+
+  .pun {
+    color: #c5c8c6 !important;
+  }
+
+  .opn {
+    color: #c5c8c6 !important;
+  }
+
+  .clo {
+    color: #c5c8c6 !important;
+  }
+
+  .tag {
+    color: #cc6666 !important;
+  }
+
+  .atn {
+    color: #de935f !important;
+  }
+  .atv {
+    color: #8abeb7 !important;
+  }
+
+  .dec {
+    color: #de935f !important;
+  }
+
+  .var {
+    color: #cc6666 !important;
+  }
+
+  .fun {
+    color: #81a2be !important;
+  }
+}

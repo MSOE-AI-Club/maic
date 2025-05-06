@@ -1,0 +1,9 @@
+name="Convolutional Neural Network (CNN)"
+description=“Understand the structure and functionality of CNNs, the model architecture used in most modern computer vision tasks.”
+category="Computer Vision"
+category_color="cyan"
+highlighted_path="True"
+horizontal_displacement="1750"
+vertical_displacement=""
+api_image_path="./img/tree-thumbnails/cnn.png"
+link="/library?nav=Articles&article=003_comp-vis"
