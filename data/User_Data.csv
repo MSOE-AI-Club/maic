@@ -58,7 +58,7 @@ Samuel Scheele,test description,NVIDIA DLI,9,9,Samuel,Scheele
 Marta Craviotto,test description,,6,0,Marta,Craviotto
 Patrick Marshall,test description,Hacksgiving,8,8,Patrick,Marshall
 Nathan Johnson,test description,,1,1,Nathan,Johnson
-Hugo Garrido-Lestache,test description,2023 Researcher|NVIDIA DLI|2024 Researcher|Hacksgiving|2025 MICS Attendee|ROSIE Competition Finalist 2025|ROSIE Competition Finalist 2025|ROSIE Presenter|ROSIE Presenter,10,5,Hugo,Garrido-Lestache
+Hugo Garrido-Lestache,test description,2023 Researcher|NVIDIA DLI|2024 Researcher|Hacksgiving|2025 MICS Attendee|ROSIE Competition Finalist 2025|ROSIE Competition Finalist 2025|ROSIE Presenter|ROSIE Presenter,10,0,Hugo,Garrido-Lestache
 Jackson Rolando,test description,,7,7,Jackson,Rolando
 Travis Jankowski,test description,eboard2025,64,60,Travis,Jankowski
 Hunter Fritchen,test description,,1,1,Hunter,Fritchen
@@ -187,9 +187,9 @@ Alexandria Such,test description,,3,3,Alexandria,Such
 Eliana Biggerz,test description,,1,1,Eliana,Biggerz
 Caleb Andreano,test description,,2,2,Caleb,Andreano
 Tuyet Vo,test description,,1,1,Tuyet,Vo
-Artemis Dempsey ,test description,NVIDIA DLI,3,3,Artemis,Dempsey
+Artemis Dempsey,test description,NVIDIA DLI,3,3,Artemis,Dempsey
 Paul Nutini,test description,Hacksgiving,4,4,Paul,Nutini
-Wendpanga Tapsoba ,test description,NVIDIA DLI|2024 Researcher|2024 MICS Attendee,7,7,Wendpanga,Tapsoba
+Wendpanga Tapsoba,test description,NVIDIA DLI|2024 Researcher|2024 MICS Attendee,7,5,Wendpanga,Tapsoba
 Brett Storoe,test description,Hacksgiving|ROSIE Presenter|NVIDIA DLI|eboard2025|eboard2024|2024 Researcher|ROSIE Competition Finalist 2024|2024 MICS Attendee|2025 MICS Attendee,15,5,Brett,Storoe
 Christian Basso,test description,2024 Researcher|2024 MICS Attendee,4,0,Christian,Basso
 Mikolaj Sordyl,test description,NVIDIA DLI|2024 Researcher|2024 MICS Attendee|ROSIE Competition Finalist 2024,5,5,Mikolaj,Sordyl
@@ -365,7 +365,7 @@ Madalyne Broennimann,test description,,1,1,,
 Mathias Galvan,test description,,1,0,,
 Zain Aayaan Mohammed,test description,,1,1,,
 Owen Jacobsen,test description,,36,36,,
-Charles Biolothompson,test description,,3,2,,
+Charles Biolothompson,test description,,3,0,,
 Marie Diffley,test description,,1,0,,
 Ben Williams,test description,NVIDIA DLI,2,2,,
 Joseph Loduca,test description,NVIDIA DLI,2,2,,
