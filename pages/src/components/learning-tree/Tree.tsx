@@ -14,7 +14,8 @@ import {
     type OnNodesChange,
     type OnEdgesChange,
     type NodeTypes,
-type DefaultEdgeOptions,
+    type DefaultEdgeOptions,
+    PanOnScrollMode,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import LearningTreeNode from "./LearningTreeNode";
@@ -1027,7 +1028,8 @@ const Tree = (props: TreeProps) => {
                 /* Change these zoom levels if tree gets larger */
                 minZoom={0.001}
                 maxZoom={2}
-                zoomOnScroll={true}
+                panOnScroll={true}
+                panOnScrollMode={PanOnScrollMode.Free}
             >
                 <Background />
                 {/* <MiniMap
