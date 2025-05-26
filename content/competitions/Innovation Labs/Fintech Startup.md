@@ -42,7 +42,7 @@ These outcomes prepare participants for future careers, showcasing their ability
 TruePrep provides invaluable support for the Innovation Labs program, including:
 - Collaboration on defining the problem statement and desired outcomes.
 - Pairing every team with TruePrep mentors from CPAs to MLEs for domain guidance.
-- Supplying curated datasets, cloud credits, and access to internal APIs where useful.
+- Supplying a $4500 prize pool, curated datasets, cloud credits, and access to internal APIs where useful.
 - Judged and selected teams for the final presentation day.
 - Representation on the judging panel, ensuring alignment with industry standards.
 
@@ -62,6 +62,15 @@ On **May 10th, 2025**, selected top teams presented their solutions to a panel o
 <img src = './img/article_content/IL_2025_Group.jpg' height = 300px>
 <br/><br/>
 
+## Congratulations to the Finalists!
+With 8 submissions, the judges had a tough time selecting the top 5 teams. Congratulations to the following teams for their hard work and dedication!
+
+- **1st Place: Tax EvAIsion** ($1500): Michael Wood, Oliver Grudzinski, Alec Weinbender
+- **2nd Place: Jeffs From Accounting** ($1000): Aiden Miller, Andy Dao, Evan Roegner, Leigh Goetsch, Ella Goetsch
+- **3rd Place: False Unprep** ($1000): Travis Jankowski, Mazen Hamid, Alexander Lopez, Patrick R. Gabrielle Sladek
+- **Honorable Mention: Virtual Dave** ($500): Nicole Baltodano
+- **Honorable Mention: True Agent**: Austin Koske, Vlad Wilson, Miles Trompeter, Isabella Ruiz, Chloe Eckdale-Dudley, Jack LeCloux, Zak Goetter, Peter Kwaterski, Colton Waltz
+<br/><br/>
 ## Connect and Stay Updated
 Whether you're a current participant, an aspiring student, or an industry professional, the Innovation Labs program offers a glimpse into the future of AI innovation. For more information, updates, and details about AI-Club’s initiatives, visit our [current eBoard page](https://msoe-maic.com/Contact.html).
 
@@ -69,4 +78,4 @@ For questions or additional details, feel free to contact:
 - **Brett Storoe (AI-Club President):** [storobe@msoe.edu](mailto:storoeb@msoe.edu)
 - **Tyge Plater (AI-Club Head of Research):** [platert@msoe.edu](mailto:platert@msoe.edu)
 
-**Innovation Labs** is an inspiring example of what’s possible when students, mentors, and industry professionals collaborate to tackle meaningful challenges. We can’t wait to see how these projects contribute to the ever-evolving field of AI! Check out our post congratulating the winners [here](https://www.linkedin.com/feed/update/urn:li:activity:7328803453042937858).
+**Innovation Labs** is an inspiring example of what’s possible when students, mentors, and industry professionals collaborate to tackle meaningful challenges. We can’t wait to see how these projects contribute to the ever-evolving field of AI! Check out our post congratulating the winners [here](https://www.linkedin.com/posts/msoeaiclub_%F0%9D%90%82%F0%9D%90%A8%F0%9D%90%A7%F0%9D%90%A0%F0%9D%90%AB%F0%9D%90%9A%F0%9D%90%AD%F0%9D%90%AE%F0%9D%90%A5%F0%9D%90%9A%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%A8%F0%9D%90%A7%F0%9D%90%AC-%F0%9D%90%AD%F0%9D%90%A8-%F0%9D%90%AD%F0%9D%90%A1%F0%9D%90%9E-activity-7328803453042937858-u5FL?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEbKdr0BjCjXW93UEWRP6J-4CIdF-1WhPMk).
