@@ -11,7 +11,7 @@ categories: Innovation Labs, AI, Project
 
 **Innovation Labs Spring 2025**, hosted by the MSOE Artificial Intelligence Club (MAIC) in collaboration with Juno (formerly TruePrep.ai), gave students the chance to tackle pressing fintech problems while honing their AI expertise. Designed to bridge the gap between academia and industry, the program emphasized creativity, teamwork, and technical excellence.
 
-<img src = './img/article_content/taxjuno_logo.png' height = 100px>
+<img src = './img/article_content/taxjuno_logo.jpg' height = 100px>
 <img src = './img/thumbnails/IL_MAIC_Logo_grad.png' height = 100px>
 <br/>
 
