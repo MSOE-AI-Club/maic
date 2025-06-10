@@ -1,6 +1,7 @@
 import logo from "./logo.png";
 import Tree from "./components/learning-tree/Tree"
 import NavBar from "./components/Navbar";
+import Legend from "./components/learning-tree/Legend";
 import {useSearchParams } from "react-router-dom";
 import React from "react";
 
@@ -15,6 +16,7 @@ const LearningTree = () => {
   return (
     <div className="App">
       <NavBar page = 'LearningTree'/>
+      <Legend/>
       <Tree nodeID = {searchParams.get("node")}/>
     </div>
   );
