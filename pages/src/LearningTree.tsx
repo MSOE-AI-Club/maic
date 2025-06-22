@@ -5,7 +5,6 @@ import Legend from "./components/learning-tree/Legend";
 import {useSearchParams } from "react-router-dom";
 import React from "react";
 
-
 const LearningTree = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -14,10 +13,19 @@ const LearningTree = () => {
   }, []);
 
   return (
-    <div className="App">
+    <div className="App" style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
       <NavBar page = 'LearningTree'/>
-      <Legend/>
-      <Tree nodeID = {searchParams.get("node")}/>
+      <div style={{ display: 'flex', flex: 1, position: 'relative' }}>
+        <Legend/>
+        <div style={{ 
+          flex: 1, 
+          marginLeft: 'max(200px, 12.5%)',
+          height: 'calc(100vh - 64px)', // Adjust based on navbar height
+          position: 'relative'
+        }}>
+          <Tree nodeID = {searchParams.get("node")}/>
+        </div>
+      </div>
     </div>
   );
 };

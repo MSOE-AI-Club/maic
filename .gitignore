@@ -1,5 +1,6 @@
 py/__pycache__/
 .vscode
+.venv
 
 404.html
 About.html

@@ -1,8 +1,6 @@
-import * as fs from "fs";
-import * as path from "path";
 import { useState, useEffect } from "react";
-import { Button, Divider, Box} from "@mui/material";
-import "./assets/library/css/left-panel.css";
+import { Button, Divider, Box, Tooltip } from "@mui/material";
+import "../library/assets/library/css/left-panel.css";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import ScienceIcon from "@mui/icons-material/Science";
 import ConstructionIcon from "@mui/icons-material/Construction";
@@ -10,15 +8,13 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import Movie from "@mui/icons-material/Movie";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
-import { TreeViewBaseItem } from "@mui/x-tree-view/models";
-import { RichTreeView } from "@mui/x-tree-view/RichTreeView";
 import { Link } from "react-router-dom";
 
 /**
  * The LeftPanelProps interface represents the props that the LeftPanel component receives.
  */
 interface LeftPanelProps {
-  
+  forceRefresh?: (section: string) => void;
 }
 
 interface nodeData {
@@ -34,62 +30,40 @@ interface category {
 }
 
 /* Map nodes to each category */
-const categoryMap: Map<string, category> = new Map()
+const categoryMap: Map<string, category> = new Map();
 
-/* Dropdown (Tree) Object that will be used to build out the directory */
-const tree: TreeViewBaseItem[] = []
-
+const createButtons = (sections: nodeData[]) => {
+  return sections.map((section, index) => (
+    <Tooltip 
+      key={index}
+      title={section.title}
+      placement="right"
+    >
+      <Button
+        component={Link}
+        to={section.linkToTree}
+        style={{ 
+          textAlign: "left", 
+          width: "100%",
+          color: "white",
+          justifyContent: "flex-start",
+          padding: "8px 16px",
+          margin: "4px 0"
+        }}
+        startIcon={<DescriptionIcon />}
+      >
+        {section.section}
+      </Button>
+    </Tooltip>
+  ));
+};
 
 /* 
 Reads all files within the 'learning-tree-nodes' directory and creates node objects for each 
 to eventually generate the Directory. 
 */
-const getSections = (directoryPath: string): nodeData[] => {
-  // Dynamically import all files in the learning-tree-nodes directory
-  const files = fs.readdirSync(directoryPath);
-  const fileDataList: nodeData[] = [];
-
-  for (const fileName of files) {
-    const fullPath = path.join(directoryPath, fileName);
-    const stat = fs.statSync(fullPath);
-
-    if (stat.isFile()) {
-      const content = fs.readFileSync(fullPath, 'utf-8');
-
-      // Extract the link from content using regex
-      const linkMatch = content.match(/link="([^"]+)"/);
-      const link = linkMatch ? linkMatch[1] : '';
-
-      // Extract the title from content using regex
-      const titleMatch = content.match(/title="([^"]+)"/);
-      const title = titleMatch ? titleMatch[1] : '';
-
-      // Extract the section from the file name
-      const section = fileName.split('-')[0];
-
-      console.log("Link to Tree: " + link);
-      console.log("Title: " + title);
-
-      fileDataList.push({
-        title: title,
-        section: section,
-        linkToTree: link,
-      });
-    }
-  }
-
-  return fileDataList;
-}
-
-/**
- * The LeftPanel component displays the left panel of the library page.
- * @param {LeftPanelProps} props - The props to be passed to the LeftPanel component.
- * @returns {JSX.Element} The LeftPanel component.
- */
-const Legend = (props: LeftPanelProps) => {
-  const [categories, setCategories] = useState<any[]>([]);
-
-  useEffect(() => {
+const getSections = async (): Promise<nodeData[]> => {
+  try {
     const parts: string[] = window.location.href.split("/");
     let baseUrl: string = "";
     if (parts[2] === "127.0.0.1:3000" || parts[2] === "localhost:3000") {
@@ -97,6 +71,67 @@ const Legend = (props: LeftPanelProps) => {
     } else {
       baseUrl = `${parts[0]}//${parts[2]}`;
     }
+    
+    const response = await fetch(`${baseUrl}/api/v1/learning-tree/sections`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch sections");
+    }
+    
+    const data = await response.json();
+    return data.sections || [];
+  } catch (error) {
+    console.error("Error fetching sections:", error);
+    // Fallback to mock data if API fails
+    return [
+      {
+        title: "Introduction to AI",
+        section: "AI Basics",
+        linkToTree: "/learning-tree?node=1"
+      },
+      {
+        title: "Machine Learning Fundamentals",
+        section: "ML Basics", 
+        linkToTree: "/learning-tree?node=2"
+      },
+      {
+        title: "Deep Learning",
+        section: "DL Basics",
+        linkToTree: "/learning-tree?node=3"
+      }
+    ];
+  }
+};
+
+/**
+ * The Legend component displays the learning tree legend/navigation.
+ * @param {LeftPanelProps} props - The props to be passed to the Legend component.
+ * @returns {JSX.Element} The Legend component.
+ */
+const Legend = (props: LeftPanelProps) => {
+  const [categories, setCategories] = useState<any[]>([]);
+  const [sections, setSections] = useState<nodeData[]>([]);
+
+  useEffect(() => {
+    console.log("Legend component mounted");
+    
+    // Get sections for learning tree
+    const fetchSections = async () => {
+      console.log("Fetching sections...");
+      const treeSections = await getSections();
+      console.log("Sections fetched:", treeSections);
+      setSections(treeSections);
+    };
+    fetchSections();
+
+    // Fetch categories from API
+    const parts: string[] = window.location.href.split("/");
+    let baseUrl: string = "";
+    if (parts[2] === "127.0.0.1:3000" || parts[2] === "localhost:3000") {
+      baseUrl = `${parts[0]}//127.0.0.1:8000`;
+    } else {
+      baseUrl = `${parts[0]}//${parts[2]}`;
+    }
+    
     fetch(`${baseUrl}/api/v1/library/tags/articles`)
       .then((response: Response) => {
         if (!response.ok) {
@@ -110,6 +145,7 @@ const Legend = (props: LeftPanelProps) => {
         Object.keys(json).forEach((key: string) => {
           buttons.push(
             <Button
+              key={key}
               style={{ textAlign: "left" }}
               component={Link}
               to={`/library?nav=Articles&type=${json[key]}`}
@@ -121,81 +157,29 @@ const Legend = (props: LeftPanelProps) => {
         setCategories(buttons);
       })
       .catch((error: Error) => {
-        // pass
+        console.error("Error fetching categories:", error);
       });
   }, []);
 
+  console.log("Legend rendering with sections:", sections.length, "categories:", categories.length);
+
   /**
-   * The LeftPanel component.
+   * The Legend component.
    */
   return (
-    <div className="left-panel">
+    <div className="left-panel" style={{ zIndex: 1000 }}>
       <h1 className="header">
-        <a href="/library">Directory</a>
+        <a href="/learning-tree">Learning Tree</a>
       </h1>
+      
+      {/* Learning Tree Sections */}
+      <Divider
+        sx={{ borderColor: "white", margin: "1rem 1rem" }}
+        aria-hidden="true"
+      />
+      <h2 className="header">Learning Paths</h2>
       <div className="navigation">
-        <Button
-          component={Link}
-          to="/library?nav=Featured"
-          startIcon={<AutoAwesomeIcon />}
-        >
-          Featured
-        </Button>
-        <Button
-          component={Link}
-          to="/library?nav=Research"
-          startIcon={<ScienceIcon />}
-        >
-          Research
-        </Button>
-        <Button
-          component={Link}
-          to="/library?nav=Articles"
-          startIcon={<DescriptionIcon />}
-          onClick={() => props.forceRefresh("Articles")}
-        >
-          Articles
-        </Button>
-        <Button
-          component={Link}
-          to="/library?nav=Workshops"
-          startIcon={<ConstructionIcon />}
-          onClick={() => props.forceRefresh("Workshops")}
-        >
-          Workshops
-        </Button>
-        {articlesDropdown && <div>{categories}</div>}
-        <Button component={Link} to="/library?nav=Videos" startIcon={<Movie />}>
-          Videos
-        </Button>
-        <Button component={Link} to="/library?nav=Competitions" startIcon={<EmojiEventsIcon />}>
-          Competitions
-        </Button>
-        {/* <Button
-          component={Link}
-          to="/library?nav=Favorites"
-          startIcon={<Favorite />}
-        >
-          Favorites
-        </Button> */}
-        <Divider
-          sx={{ borderColor: "white", margin: "1rem 1rem" }}
-          aria-hidden="true"
-        />
-        <Button
-          component={Link}
-          to="https://forms.office.com/r/STYXQ1FPMn"
-          startIcon={<NoteAddIcon />}
-        >
-          Submit
-        </Button>
-        {/* <Button
-          component={Link}
-          to="/About.html"
-          startIcon={<HelpIcon />}
-        >
-          Help
-        </Button> */}
+        {sections.length > 0 ? createButtons(sections) : <div>Loading sections...</div>}
       </div>
     </div>
   );

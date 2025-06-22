@@ -166,20 +166,25 @@ class LearningTree():
         return required_keys
 
     def generate_position(self, node_id: int, parent_ids: List[int], horizontal_displacement, vertical_displacement) -> Dict[str, int]:
-        total = 0
-        for parent in parent_ids:
-            temp = self.nodes[parent]['data']['horizontal_displacement']
-            if temp != '':
-                total += int(temp)
-        average_horizontal_position = total // len(parent_ids)
-        if horizontal_displacement == '':
-            x_position = average_horizontal_position
+        if not parent_ids:
+            # If no parents, use default position
+            x_position = 0
+            y_position = 0
         else:
-            x_position = average_horizontal_position + int(horizontal_displacement)
-        y_position = self.nodes[parent_ids[0]]['position']['y']
-        if vertical_displacement != '': 
-            y_position += int(vertical_displacement)
-        else: y_position += 500 # THIS IS DEFAULT CASE IF USER DOES NOT INPUT
+            total = 0
+            for parent in parent_ids:
+                temp = self.nodes[parent]['data']['horizontal_displacement']
+                if temp != '':
+                    total += int(temp)
+            average_horizontal_position = total // len(parent_ids)
+            if horizontal_displacement == '':
+                x_position = average_horizontal_position
+            else:
+                x_position = average_horizontal_position + int(horizontal_displacement)
+            y_position = self.nodes[parent_ids[0]]['position']['y']
+            if vertical_displacement != '': 
+                y_position += int(vertical_displacement)
+            else: y_position += 500 # THIS IS DEFAULT CASE IF USER DOES NOT INPUT
 
         pos = {
             'x': x_position,
@@ -197,9 +202,40 @@ class LearningTree():
                 node2_id = node2['id']
                 if node != node2 and node_id in node2['parent']:
                     children.append(node2_id)
-
             node['children'] = children
-
         return sorted_list
+
+    def get_sections(self):
+        """
+        Returns a list of sections for navigation purposes.
+        :return: List of section dictionaries with title, section name, and link
+        """
+        sections = []
+        for node_name in self.node_names:
+            try:
+                _, node_id, _ = self._split_string(node_name)
+                node_data = self._file_to_dict(node_name, node_id, [])
+                
+                # Extract section from category or use a default
+                section_name = node_data['data'].get('category', 'General')
+                
+                sections.append({
+                    'title': node_data['data'].get('name', 'Untitled'),
+                    'section': section_name,
+                    'linkToTree': f'/learning-tree?node={node_id}'
+                })
+            except Exception as e:
+                print(f"Error processing node {node_name}: {e}")
+                continue
+        
+        # Remove duplicates based on section name
+        unique_sections = []
+        seen_sections = set()
+        for section in sections:
+            if section['section'] not in seen_sections:
+                unique_sections.append(section)
+                seen_sections.add(section['section'])
+        
+        return unique_sections
 
 x = LearningTree().builder()

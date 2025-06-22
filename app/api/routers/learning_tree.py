@@ -17,3 +17,12 @@ async def get_learning_tree():
         return JSONResponse(content=learning_tree.builder())
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"An error occurred while generating the learning tree: {str(e)}")
+
+@router.get("/sections", description="Get learning tree sections for navigation")
+async def get_learning_tree_sections():
+    try:
+        learning_tree = LearningTree(path=path_to_nodes)
+        sections = learning_tree.get_sections()
+        return JSONResponse(content={"sections": sections})
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"An error occurred while getting sections: {str(e)}")
