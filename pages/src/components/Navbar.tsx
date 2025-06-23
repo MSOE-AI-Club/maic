@@ -55,10 +55,10 @@ const NavBar = (props: NavBarProps) => {
         <p>Learning Tree</p>
       </a>
       <a
-        className={`${props.page === "Workshops" ? "active" : ""}`}
-        href="/Workshops.html"
+        className={`${props.page === "Events" ? "active" : ""}`}
+        href="/Events.html"
       >
-        <p>Workshops</p>
+        <p>Events</p>
       </a>
       <a
         className={`${props.page === "Merch" ? "active" : ""}`}
