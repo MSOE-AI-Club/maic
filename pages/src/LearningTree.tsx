@@ -20,7 +20,6 @@ const LearningTree = () => {
         <div style={{ 
           flex: 1, 
           marginLeft: 'max(200px, 12.5%)',
-          height: 'calc(100vh - 64px)', // Adjust based on navbar height
           position: 'relative'
         }}>
           <Tree nodeID = {searchParams.get("node")}/>

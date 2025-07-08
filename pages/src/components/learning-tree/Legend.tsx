@@ -1,13 +1,7 @@
 import { useState, useEffect } from "react";
-import { Button, Divider, Box, Tooltip } from "@mui/material";
-import "../library/assets/library/css/left-panel.css";
-import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
-import ScienceIcon from "@mui/icons-material/Science";
-import ConstructionIcon from "@mui/icons-material/Construction";
+import { Button, Divider, Tooltip } from "@mui/material";
+import "./assets/css/legend.css";
 import DescriptionIcon from "@mui/icons-material/Description";
-import Movie from "@mui/icons-material/Movie";
-import NoteAddIcon from "@mui/icons-material/NoteAdd";
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import { Link } from "react-router-dom";
 
 /**
@@ -168,16 +162,15 @@ const Legend = (props: LeftPanelProps) => {
    */
   return (
     <div className="left-panel" style={{ zIndex: 1000 }}>
-      <h1 className="header">
+      <h2 className="header">
         <a href="/learning-tree">Learning Tree</a>
-      </h1>
+      </h2>
       
       {/* Learning Tree Sections */}
       <Divider
-        sx={{ borderColor: "white", margin: "1rem 1rem" }}
+        sx={{ borderColor: "white", margin: "0rem 1rem" }}
         aria-hidden="true"
       />
-      <h2 className="header">Learning Paths</h2>
       <div className="navigation">
         {sections.length > 0 ? createButtons(sections) : <div>Loading sections...</div>}
       </div>
