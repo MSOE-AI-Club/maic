@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import { Button, Divider, Tooltip } from "@mui/material";
+import { Button, Divider, Tooltip} from "@mui/material";
+import { TreeViewBaseItem } from '@mui/x-tree-view/models';
+import { RichTreeView } from '@mui/x-tree-view/RichTreeView';
 import "./assets/css/legend.css";
 import DescriptionIcon from "@mui/icons-material/Description";
 import { Link } from "react-router-dom";
@@ -17,14 +19,83 @@ interface nodeData {
   linkToTree: string;
 }
 
-interface category {
+interface section {
   title: string;
-  id: string;
-  children: nodeData[];
+  nodes: nodeData[];
+  linkToTree: string;
 }
 
-/* Map nodes to each category */
-const categoryMap: Map<string, category> = new Map();
+
+// Get node data from backend
+const get_all_nodes = async () => {
+
+  // Use correct url depending on environment
+  const parts: string[] = window.location.href.split("/");
+  let baseUrl: string = "";
+  if (parts[2] === "127.0.0.1:3000" || parts[2] === "localhost:3000") {
+    baseUrl = `${parts[0]}//127.0.0.1:8000`;
+  } else {
+    baseUrl = `${parts[0]}//${parts[2]}`;
+  }
+
+  try {
+    const response = await fetch(`${baseUrl}/api/v1/learning-tree/all-nodes`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch nodes");
+    }
+    const data = await response.json();
+    return data.nodes || [];
+  } catch (error) {
+    console.error("Error fetching sections:", error);
+    // Fallback to mock data if API fails
+    return {
+      "AI Basics": [
+        {
+          title: "Introduction to AI",
+          section: "AI Basics",
+          linkToTree: "/learning-tree?node=1"
+        }
+      ]
+    }
+  }
+}
+
+// Create MUI X Tree View Object to display tree of dropdowns
+const create_MUI_X_TreeView = async () => {
+  const treeView: TreeViewBaseItem[] = [];
+  const nodes = await get_all_nodes();
+
+  // {
+  //   id: 'grid',
+  //   label: 'Data Grid',
+  //   children: [
+  //     { id: 'grid-community', label: '@mui/x-data-grid' },
+  //     { id: 'grid-pro', label: '@mui/x-data-grid-pro' },
+  //     { id: 'grid-premium', label: '@mui/x-data-grid-premium' },
+  //   ],
+  // },
+
+  for (const sectionName of Object.keys(nodes)) {
+    const sectionNodes = nodes[sectionName];
+    let children = [];
+    for (const node of sectionNodes) {
+      children.push({
+        id: node.title,
+        label: node.title,
+        linkToTree: node.linkToTree
+      });
+    }
+    treeView.push({
+      id: sectionName,
+      label: sectionName,
+      children: children
+    });
+  }
+
+  console.log("Tree View:", treeView);
+
+  return treeView;
+}
 
 const createButtons = (sections: nodeData[]) => {
   return sections.map((section, index) => (
@@ -104,9 +175,15 @@ const getSections = async (): Promise<nodeData[]> => {
 const Legend = (props: LeftPanelProps) => {
   const [categories, setCategories] = useState<any[]>([]);
   const [sections, setSections] = useState<nodeData[]>([]);
+  const [directory, setDirectory] = useState<TreeViewBaseItem[]>([]);
 
   useEffect(() => {
     console.log("Legend component mounted");
+
+    const fetchDirectory = async () => {
+      setDirectory(await create_MUI_X_TreeView());
+    };
+    fetchDirectory();
     
     // Get sections for learning tree
     const fetchSections = async () => {
@@ -172,6 +249,7 @@ const Legend = (props: LeftPanelProps) => {
         aria-hidden="true"
       />
       <div className="navigation">
+        
         {sections.length > 0 ? createButtons(sections) : <div>Loading sections...</div>}
       </div>
     </div>

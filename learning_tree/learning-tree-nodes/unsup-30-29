@@ -1,6 +1,6 @@
-name="Difference Between Supervised and Unsupervised Learnin"
+name="Unsupervised Clustering"
 description="With unsupervised learning, a common algorithm is "clustering" data points together based on their similarities. This article will explain the concept of unsupervised clustering."
-category="Unsupervised Clustering"
+category="Unsupervised Learning"
 category_color="brown"
 highlighted_path="True"
 horizontal_displacement="200"

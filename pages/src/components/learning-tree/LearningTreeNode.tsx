@@ -5,7 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 import { Node, NodeProps } from '@xyflow/react';
 import { Position, Handle } from '@xyflow/react';
 import './assets/css/learningTreeNode.css';
@@ -166,10 +166,10 @@ const LearningTreeNode = ({ data }: NodeProps<treeNode>) => {
   if (state.raised) { // Big Node Content
     card.push(
       <CardActionArea href={data.link}>
-        <Grid container spacing={0.5}>
+        <Box sx={{ display: 'flex', gap: 0.5 }}>
           {/* Left Side: Image and Title */}
-          <Grid item xs={6} container direction="column" justifyContent="space-between" sx={{maxWidth: 200}}>
-            <Grid item>
+          <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', maxWidth: 200 }}>
+            <Box>
               <CardMedia
                 component="img"
                 height="200"
@@ -179,26 +179,26 @@ const LearningTreeNode = ({ data }: NodeProps<treeNode>) => {
                 alt="Image"
                 sx={{ borderRadius: 2 }}
               />
-            </Grid>
-            <Grid item>
+            </Box>
+            <Box>
               <CardContent>
                 <div className="title">
                   {data.name}
                 </div>
               </CardContent>
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
 
           {/* Right Side: Description and Category */}
-          <Grid item xs={6} container direction="column" justifyContent="space-between" sx={{maxWidth: 200}}>
-            <Grid item>
+          <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', maxWidth: 200 }}>
+            <Box>
               <CardContent>
                 <div>
                   {data.description}
                 </div>
               </CardContent>
-            </Grid>
-            <Grid item>
+            </Box>
+            <Box>
                 <Chip
                     sx={{
                     backgroundColor: baseColor,
@@ -215,9 +215,9 @@ const LearningTreeNode = ({ data }: NodeProps<treeNode>) => {
                 >
                     Click to learn more!
                 </Typography>
-            </Grid>
-          </Grid>
-        </Grid>
+            </Box>
+          </Box>
+        </Box>
       </CardActionArea>
     );
   } else { // Small Node Content
