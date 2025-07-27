@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { Button, Divider, Tooltip} from "@mui/material";
 import { TreeViewBaseItem } from '@mui/x-tree-view/models';
 import { RichTreeView } from '@mui/x-tree-view/RichTreeView';
+import { useTreeViewApiRef } from '@mui/x-tree-view/hooks';
 import "./assets/css/legend.css";
 import DescriptionIcon from "@mui/icons-material/Description";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 /**
  * The LeftPanelProps interface represents the props that the LeftPanel component receives.
@@ -176,6 +177,7 @@ const Legend = (props: LeftPanelProps) => {
   const [categories, setCategories] = useState<any[]>([]);
   const [sections, setSections] = useState<nodeData[]>([]);
   const [directory, setDirectory] = useState<TreeViewBaseItem[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log("Legend component mounted");
@@ -234,6 +236,8 @@ const Legend = (props: LeftPanelProps) => {
 
   console.log("Legend rendering with sections:", sections.length, "categories:", categories.length);
 
+  const [lastClickedItem, setLastClickedItem] = useState<string | null>(null);
+
   /**
    * The Legend component.
    */
@@ -249,7 +253,30 @@ const Legend = (props: LeftPanelProps) => {
         aria-hidden="true"
       />
       <div className="navigation">
-        
+        <RichTreeView
+          items={directory}
+          onItemClick={(event, itemId) => {
+            // Find the clicked item in the directory to get its linkToTree
+            const findItemLink = (items: TreeViewBaseItem[], targetItemId: string): string | null => {
+              for (const treeItem of items) {
+                if (treeItem.id === targetItemId && 'linkToTree' in treeItem) {
+                  return (treeItem as any).linkToTree;
+                }
+                if (treeItem.children) {
+                  const found = findItemLink(treeItem.children, targetItemId);
+                  if (found) return found;
+                }
+              }
+              return null;
+            };
+            
+            const link = findItemLink(directory, itemId);
+            console.log(link);
+            if (link) {
+              navigate(link);
+            }
+          }}
+        />
         {sections.length > 0 ? createButtons(sections) : <div>Loading sections...</div>}
       </div>
     </div>

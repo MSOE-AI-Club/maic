@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
     ReactFlow, 
     Background, 
@@ -16,6 +16,8 @@ import {
     type NodeTypes,
     type DefaultEdgeOptions,
     PanOnScrollMode,
+    ReactFlowProvider,
+    useReactFlow,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import LearningTreeNode from "./LearningTreeNode";
@@ -967,9 +969,10 @@ const generateEdges = (nodes: CustomNode[]): Edge[] => {
 
 // const initialEdges: Edge[] = generateEdges(initialNodes);
 
-const Tree = (props: TreeProps) => {
+const TreeInner = (props: TreeProps) => {
     const [nodes, setNodes] = useState<CustomNode[]>([]);
     const [edges, setEdges] = useState<Edge[]>([]);
+    const { fitView } = useReactFlow();
 
     const parts: string[] = window.location.href.split("/");
     let baseUrl: string = "";
@@ -1011,6 +1014,20 @@ const Tree = (props: TreeProps) => {
         fetchNodes();
     }, [baseUrl]);
 
+    // Effect to focus on specific node when nodeID changes
+    useEffect(() => {
+        if (props.nodeID && nodes.length > 0) {
+            // Wait a bit for the nodes to be rendered
+            setTimeout(() => {
+                fitView({ 
+                    nodes: [{ id: props.nodeID! }],
+                    duration: 800,
+                    padding: 5
+                });
+            }, 100);
+        }
+    }, [props.nodeID, nodes, fitView]);
+
     if(props.nodeID !== null){
         fitViewOptions.nodes = [{id: `${props.nodeID}`}];
     }
@@ -1043,6 +1060,14 @@ const Tree = (props: TreeProps) => {
                 />
             </ReactFlow>
         </div>
+    );
+};
+
+const Tree = (props: TreeProps) => {
+    return (
+        <ReactFlowProvider>
+            <TreeInner {...props} />
+        </ReactFlowProvider>
     );
 };
 
