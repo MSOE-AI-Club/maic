@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-import { Button, Divider, Tooltip} from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Button, Divider, Tooltip, Box, Typography } from "@mui/material";
+import { styled, alpha } from '@mui/material/styles';
 import { TreeViewBaseItem } from '@mui/x-tree-view/models';
 import { RichTreeView } from '@mui/x-tree-view/RichTreeView';
 import { useTreeViewApiRef } from '@mui/x-tree-view/hooks';
@@ -25,6 +26,7 @@ interface section {
   nodes: nodeData[];
   linkToTree: string;
 }
+
 
 
 // Get node data from backend
@@ -66,16 +68,6 @@ const create_MUI_X_TreeView = async () => {
   const treeView: TreeViewBaseItem[] = [];
   const nodes = await get_all_nodes();
 
-  // {
-  //   id: 'grid',
-  //   label: 'Data Grid',
-  //   children: [
-  //     { id: 'grid-community', label: '@mui/x-data-grid' },
-  //     { id: 'grid-pro', label: '@mui/x-data-grid-pro' },
-  //     { id: 'grid-premium', label: '@mui/x-data-grid-premium' },
-  //   ],
-  // },
-
   for (const sectionName of Object.keys(nodes)) {
     const sectionNodes = nodes[sectionName];
     let children = [];
@@ -114,7 +106,15 @@ const createButtons = (sections: nodeData[]) => {
           color: "white",
           justifyContent: "flex-start",
           padding: "8px 16px",
-          margin: "4px 0"
+          margin: "4px 0",
+          transition: "all 0.2s ease-in-out",
+          borderRadius: "8px",
+        }}
+        sx={{
+          '&:hover': {
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            transform: 'translateX(4px)',
+          }
         }}
         startIcon={<DescriptionIcon />}
       >
@@ -219,7 +219,7 @@ const Legend = (props: LeftPanelProps) => {
           buttons.push(
             <Button
               key={key}
-              style={{ textAlign: "left" }}
+              style={{ textAlign: "left", color: "white" }}
               component={Link}
               to={`/library?nav=Articles&type=${json[key]}`}
             >
@@ -236,7 +236,18 @@ const Legend = (props: LeftPanelProps) => {
 
   console.log("Legend rendering with sections:", sections.length, "categories:", categories.length);
 
-  const [lastClickedItem, setLastClickedItem] = useState<string | null>(null);
+  const findItemLink = (items: TreeViewBaseItem[], targetItemId: string): string | null => {
+    for (const treeItem of items) {
+      if (treeItem.id === targetItemId && 'linkToTree' in treeItem) {
+        return (treeItem as any).linkToTree;
+      }
+      if (treeItem.children) {
+        const found = findItemLink(treeItem.children, targetItemId);
+        if (found) return found;
+      }
+    }
+    return null;
+  };
 
   /**
    * The Legend component.
@@ -252,32 +263,56 @@ const Legend = (props: LeftPanelProps) => {
         sx={{ borderColor: "white", margin: "0rem 1rem" }}
         aria-hidden="true"
       />
-      <div className="navigation">
+      <div className="navigation" style={{ 
+        height: 'calc(100vh - 125px)', 
+        overflowY: 'auto',
+        marginRight: '16px'
+      }}>
         <RichTreeView
           items={directory}
+          defaultExpandedItems={[]}
           onItemClick={(event, itemId) => {
-            // Find the clicked item in the directory to get its linkToTree
-            const findItemLink = (items: TreeViewBaseItem[], targetItemId: string): string | null => {
-              for (const treeItem of items) {
-                if (treeItem.id === targetItemId && 'linkToTree' in treeItem) {
-                  return (treeItem as any).linkToTree;
-                }
-                if (treeItem.children) {
-                  const found = findItemLink(treeItem.children, targetItemId);
-                  if (found) return found;
-                }
-              }
-              return null;
-            };
-            
             const link = findItemLink(directory, itemId);
-            console.log(link);
-            if (link) {
-              navigate(link);
-            }
+            if (link) navigate(link);
+          }}
+          sx={{
+            color: 'white',
+            height: '100%',
+            '& .MuiTreeItem-content': {
+              color: 'white',
+              borderRadius: '8px',
+              margin: '2px 0',
+              paddingRight: '16px',
+              transition: 'all 0.2s ease-in-out',
+              '&:hover': {
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                transform: 'translateX(4px)',
+              },
+              '&.Mui-focused, &.Mui-selected': {
+                backgroundColor: 'rgba(5, 120, 255, 0.2)',
+                border: '1px solid rgba(5, 120, 255, 0.5)',
+              },
+            },
+            '& .MuiTreeItem-label': {
+              color: 'white',
+              fontFamily: 'Roboto, sans-serif',
+              fontWeight: 500,
+              fontSize: '0.75rem',
+              textAlign: 'left',
+              justifyContent: 'flex-start',
+            },
+            '& .MuiTreeItem-iconContainer': {
+              color: 'white',
+              '& svg': {
+                color: 'white',
+              },
+            },
+            '& .MuiTreeItem-group': {
+              marginLeft: '16px',
+              paddingRight: '16px',
+            },
           }}
         />
-        {sections.length > 0 ? createButtons(sections) : <div>Loading sections...</div>}
       </div>
     </div>
   );

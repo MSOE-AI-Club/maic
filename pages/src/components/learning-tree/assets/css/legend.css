@@ -27,16 +27,38 @@
 }
 
 .navigation {
-  width: 100%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   justify-content: left;
   margin-top: 1rem;
+  padding-left: 5%;
+  padding-right: 5%;
+  /* Custom scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
+}
+
+.navigation::-webkit-scrollbar {
+  width: 6px;
+}
+
+.navigation::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.navigation::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.navigation::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .navigation > a {
   justify-content: left;
-  padding-left: 0.5rem;
   color: white;
   font-size: 0.75rem;
   margin: 0 1rem;
@@ -63,4 +85,85 @@
 
 .navigation > div > a > span > svg {
   font-size: 1.5rem !important;
+}
+
+/* Enhanced Tree View Styles */
+.navigation .MuiTreeView-root {
+  color: white !important;
+  background: transparent;
+}
+
+.navigation .MuiTreeItem-root {
+  color: white !important;
+}
+
+.navigation .MuiTreeItem-content {
+  color: white !important;
+  border-radius: 8px;
+  margin: 2px 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.navigation .MuiTreeItem-content:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  transform: translateX(4px);
+}
+
+.navigation .MuiTreeItem-content.Mui-focused,
+.navigation .MuiTreeItem-content.Mui-selected {
+  background-color: rgba(5, 120, 255, 0.2) !important;
+  border: 1px solid rgba(5, 120, 255, 0.5);
+}
+
+.navigation .MuiTreeItem-label {
+  color: white !important;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+
+.navigation .MuiTreeItem-iconContainer {
+  color: white !important;
+}
+
+.navigation .MuiTreeItem-iconContainer svg {
+  color: white !important;
+}
+
+/* Custom scrollbar for tree view */
+.navigation .MuiTreeView-root::-webkit-scrollbar {
+  width: 6px;
+}
+
+.navigation .MuiTreeView-root::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.navigation .MuiTreeView-root::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.navigation .MuiTreeView-root::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Button enhancements */
+.navigation .MuiButton-root {
+  text-transform: none;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.navigation .MuiButton-root:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  transform: translateX(4px);
+}
+
+/* Loading state */
+.navigation div[style*="color: white"] {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-style: italic;
+  opacity: 0.8;
 }
