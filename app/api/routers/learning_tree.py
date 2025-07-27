@@ -26,3 +26,12 @@ async def get_learning_tree_sections():
         return JSONResponse(content={"sections": sections})
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"An error occurred while getting sections: {str(e)}")
+
+@router.get("/all-nodes", description="Get data for all nodes in the learning tree")
+async def get_learning_tree_nodes():
+    try:
+        learning_tree = LearningTree(path=path_to_nodes)
+        nodes = learning_tree.get_all_nodes()
+        return JSONResponse(content={"nodes": nodes})
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"An error occurred while getting nodes: {str(e)}")

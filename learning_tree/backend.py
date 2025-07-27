@@ -238,4 +238,32 @@ class LearningTree():
         
         return unique_sections
 
+    def get_all_nodes(self):
+        """
+        Returns an object of all the nodes in the learning tree sorted by section.
+        """
+        nodes = {}
+        for node_name in self.node_names:
+            try:
+                _, node_id, _ = self._split_string(node_name)
+                node_data = self._file_to_dict(node_name, node_id, [])
+                
+                # Extract section from category or use a default
+                section_name = node_data['data'].get('category', 'General')
+
+                if section_name not in nodes:
+                    nodes[section_name] = []
+                
+                nodes[section_name].append({
+                    'title': node_data['data'].get('name', 'Untitled'),
+                    'section': section_name,
+                    'linkToTree': f'/learning-tree?node={node_id}'
+                })
+
+            except Exception as e:
+                print(f"Error processing node {node_name}: {e}")
+                continue
+        
+        return nodes
+
 x = LearningTree().builder()
